@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import {Request, Response} from 'express'
 
 (async () => {
 
@@ -28,7 +29,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
-  app.get("/filteredimage/", async (req, res) => {
+  app.get("/filteredimage/", async (req: Request, res: Response) => {
     const img_url = req.query.image_url;
     if(!img_url) {
       res.status(400).send("invalid url");
@@ -39,14 +40,14 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
         res.send(err);
       }
       deleteLocalFiles([img_path]);
-    })
-  })
+    });
+  });
 
   //! END @TODO1
   
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req: Request, res: Response ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   
