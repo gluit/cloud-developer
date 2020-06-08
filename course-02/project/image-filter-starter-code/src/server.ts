@@ -30,11 +30,11 @@ import {Request, Response} from 'express'
 
   /**************************************************************************** */
   app.get("/filteredimage/", async (req: Request, res: Response) => {
-    const img_url = req.query.image_url;
+    const img_url:string = req.query.image_url;
     if(!img_url) {
       res.status(400).send("invalid url");
     }
-    const img_path = await filterImageFromURL(img_url);
+    const img_path: string = await filterImageFromURL(img_url);
     res.status(200).sendFile(img_path, err => {
       if(err) {
         res.send(err);
